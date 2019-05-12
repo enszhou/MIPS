@@ -22,6 +22,8 @@
 
 module CPU(
     input clk,
+    input cont,
+    input run,
     input rst,
     input [31:0] MemData,
     input [4:0] RegNum,
@@ -69,7 +71,7 @@ module CPU(
     Reg_File mo_reg_file(IR[25:21], IR[20:16], RegNum, Mux_RegWriteNum, Mux_RegWriteData, RegWrite, rst, clk, RegReadData1, RegReadData2, RegData); 
     ALUControlUnit mo_alucu(IR[5:0], ALUOp , opcode, ALUControlCode);
     ALU mo_alu(Mux_ALU_A, Mux_ALU_B, ALUControlCode, ALUResult, Zero); 
-    ControlUnit mo_control_unit(clk,rst,opcode,ALUSrcB,ALUOp,PCSource,ALUSrcA,IorD,IRWrite,PCWrite,PCWriteCond,MemWrite,RegDst,RegWrite,MemtoReg,PCWriteCond_bne);
+    ControlUnit mo_control_unit(clk,cont,run,rst,opcode,ALUSrcB,ALUOp,PCSource,ALUSrcA,IorD,IRWrite,PCWrite,PCWriteCond,MemWrite,RegDst,RegWrite,MemtoReg,PCWriteCond_bne);
     assign opcode = IR[31:26];
     //output
     assign MemAddr = Mux_MemAddr;

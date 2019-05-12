@@ -30,7 +30,7 @@ module ALUControlUnit(
     localparam ADD = 4'b0000;
     localparam SUB = 4'b0010;
     
-    always @(ALUOp or funct)
+    always @(ALUOp or funct or opcode)
     begin
         case(ALUOp)
             2'b00: ALUControlCode = ADD;

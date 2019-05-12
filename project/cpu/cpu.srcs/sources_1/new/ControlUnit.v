@@ -22,13 +22,21 @@
 
 module ControlUnit(
     input clk,
+    input cont,
+    input run,
     input rst,
     input [5:0] opcode,
     output reg [1:0] ALUSrcB,ALUOp,PCSource,
     output reg ALUSrcA,IorD,IRWrite,PCWrite,PCWriteCond,MemWrite,RegDst,RegWrite,MemtoReg,PCWriteCond_bne
     );
     
+    localparam CONT = 4'b0000;
+    localparam STEP = 4'b1111;
+    
+    wire [3:0] init = cont ? CONT : STEP;
+    
     reg [3:0] state, nextstate;
+    reg flag;
     //reg [1:0] ALUSrcB,ALUOp,PCSource;
     //reg ALUSrcA,IorD,IRWrite,PCWrite,PCWriteCond,MemWrite,RegDst,RegWrite,MemtoReg;
     
@@ -36,7 +44,7 @@ module ControlUnit(
     begin
         if(rst)
         begin
-            state <= 4'b0000;
+            state <= init;
         end
         else
         begin
@@ -44,35 +52,37 @@ module ControlUnit(
         end
     end
     
-    always@(state or opcode)
+    always@(state or opcode or run)
     begin
         case(state)
-            4'b0000: nextstate <= 4'b0001;
+            4'b0000:nextstate = 4'b0001;
             4'b0001:
                 begin
-                    if(opcode == 6'h23 || opcode == 6'h2b) nextstate <= 4'b0010;
-                    else if(opcode == 6'h4)nextstate <= 4'b1000;
-                    else if(opcode == 6'h2)nextstate <= 4'b1001;
-                    else if(opcode == 6'h5)nextstate <= 4'b1010;
-                    else if(opcode == 6'h0)nextstate <= 4'b0110; //RR
-                    else nextstate <= 4'b1011; //RI
+                    if(opcode == 6'h23 || opcode == 6'h2b) nextstate = 4'b0010;
+                    else if(opcode == 6'h4)nextstate = 4'b1000;
+                    else if(opcode == 6'h2)nextstate = 4'b1001;
+                    else if(opcode == 6'h5)nextstate = 4'b1010;
+                    else if(opcode == 6'h0)nextstate = 4'b0110; //RR
+                    else nextstate = 4'b1011; //RI
                 end
             4'b0010:
                 begin
-                    if(opcode == 6'h23) nextstate <= 4'b0011;
-                    else nextstate <= 4'b0101;
+                    if(opcode == 6'h23) nextstate = 4'b0011;
+                    else nextstate = 4'b0101;
                 end
-            4'b0011: nextstate <= 4'b0100;
-            4'b0100: nextstate <= 4'b0000;
-            4'b0101: nextstate <= 4'b0000;
-            4'b0110: nextstate <= 4'b0111;
-            4'b0111: nextstate <= 4'b0000;
-            4'b1000: nextstate <= 4'b0000;
-            4'b1001: nextstate <= 4'b0000;
-            4'b1010: nextstate <= 4'b0000;
-            4'b1011: nextstate <= 4'b1100; //compute
-            4'b1100: nextstate <= 4'b0000; //reg write
-            default: nextstate <= 4'b0000;
+            4'b0011: nextstate = 4'b0100;
+            4'b0100: nextstate = init;
+            4'b0101: nextstate = init;
+            4'b0110: nextstate = 4'b0111;
+            4'b0111: nextstate = init;
+            4'b1000: nextstate = init;
+            4'b1001: nextstate = init;
+            4'b1010: nextstate = init;
+            4'b1011: nextstate = 4'b1100; //compute
+            4'b1100: nextstate = init; //reg write
+            4'b1111: if(run) nextstate = 4'b0000;
+                     else nextstate = 4'b1111;
+            default: nextstate = init;
         endcase
         
     end
@@ -87,10 +97,10 @@ module ControlUnit(
             ALUOp    <= 2'b00;  
             IorD     <= 1'b0;   
             PCSource <= 2'b00;  
-            IRWrite  <= 1'b1;   
+            IRWrite  <= cont;   
             MemWrite <= 1'b0;   
             RegWrite <= 1'b0;   
-            PCWrite  <= 1'b1;   
+            PCWrite  <= cont;   
             PCWriteCond <= 1'b0;
             PCWriteCond_bne <= 1'b0;
         end
@@ -247,7 +257,16 @@ module ControlUnit(
                   PCWrite  <= 1'b0;         
                   PCWriteCond <= 1'b0;      
                   PCWriteCond_bne <= 1'b0;  
-              end                                                                                                                             
+              end 
+            4'b1111:
+                begin                       
+                    IRWrite  <= 1'b0;       
+                    MemWrite <= 1'b0;       
+                    RegWrite <= 1'b0;       
+                    PCWrite  <= 1'b0;       
+                    PCWriteCond <= 1'b0;    
+                    PCWriteCond_bne <= 1'b0;
+                end                                                                                                                                                                    
             default:
                 begin
                     IRWrite  <= 1'b0;   

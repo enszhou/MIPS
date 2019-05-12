@@ -69,15 +69,15 @@ set rc [catch {
   create_project -in_memory -part xc7a100tcsg324-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.cache/wt [current_project]
-  set_property parent.project_path D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.xpr [current_project]
-  set_property ip_output_repo D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.cache/ip [current_project]
+  set_property webtalk.parent_dir D:/Dev/HardWare/MIPS/project/cpu/cpu.cache/wt [current_project]
+  set_property parent.project_path D:/Dev/HardWare/MIPS/project/cpu/cpu.xpr [current_project]
+  set_property ip_output_repo D:/Dev/HardWare/MIPS/project/cpu/cpu.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES XPM_CDC [current_project]
-  add_files -quiet D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.runs/synth_1/Top.dcp
-  read_ip -quiet D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
-  read_ip -quiet D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci
-  read_xdc D:/2019Spring/lab/cod/verilog/lab5/cpu/cpu.srcs/constrs_1/imports/Module/Nexys4DDR_Master.xdc
+  add_files -quiet D:/Dev/HardWare/MIPS/project/cpu/cpu.runs/synth_1/Top.dcp
+  read_ip -quiet D:/Dev/HardWare/MIPS/project/cpu/cpu.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+  read_ip -quiet D:/Dev/HardWare/MIPS/project/cpu/cpu.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci
+  read_xdc D:/Dev/HardWare/MIPS/project/cpu/cpu.srcs/constrs_1/imports/Module/Nexys4DDR_Master.xdc
   link_design -top Top -part xc7a100tcsg324-1
   close_msg_db -file init_design.pb
 } RESULT]

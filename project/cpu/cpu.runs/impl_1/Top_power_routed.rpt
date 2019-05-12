@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sat May 11 23:10:12 2019
+| Date             : Sun May 12 17:49:38 2019
 | Host             : ENSZHOU running 64-bit major release  (build 9200)
 | Command          : report_power -file Top_power_routed.rpt -pb Top_power_summary_routed.pb -rpx Top_power_routed.rpx
 | Design           : Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.252        |
+| Total On-Chip Power (W)  | 0.257        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.155        |
+| Dynamic (W)              | 0.159        |
 | Device Static (W)        | 0.098        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 83.8         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        5 |       --- |             --- |
-| Slice Logic              |     0.006 |     3523 |       --- |             --- |
-|   LUT as Logic           |     0.005 |     1433 |     63400 |            2.26 |
+| Slice Logic              |     0.009 |     3521 |       --- |             --- |
+|   LUT as Logic           |     0.008 |     1437 |     63400 |            2.27 |
 |   LUT as Distributed RAM |    <0.001 |      176 |     19000 |            0.93 |
 |   F7/F8 Muxes            |    <0.001 |      479 |     63400 |            0.76 |
-|   CARRY4                 |    <0.001 |       22 |     15850 |            0.14 |
-|   Register               |    <0.001 |     1303 |    126800 |            1.03 |
+|   Register               |    <0.001 |     1300 |    126800 |            1.03 |
+|   CARRY4                 |    <0.001 |       21 |     15850 |            0.13 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |       23 |       --- |             --- |
-| Signals                  |     0.011 |     2333 |       --- |             --- |
+|   Others                 |     0.000 |       24 |       --- |             --- |
+| Signals                  |     0.015 |     2347 |       --- |             --- |
 | MMCM                     |     0.106 |        1 |         6 |           16.67 |
-| I/O                      |     0.032 |       40 |       210 |           19.05 |
+| I/O                      |     0.029 |       40 |       210 |           19.05 |
 | Static Power             |     0.098 |          |           |                 |
-| Total                    |     0.252 |          |           |                 |
+| Total                    |     0.257 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,9 +75,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.033 |       0.018 |      0.015 |
+| Vccint    |       1.000 |     0.040 |       0.025 |      0.015 |
 | Vccaux    |       1.800 |     0.078 |       0.060 |      0.018 |
-| Vcco33    |       3.300 |     0.013 |       0.009 |      0.004 |
+| Vcco33    |       3.300 |     0.012 |       0.008 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -146,16 +146,16 @@ Table of Contents
 +-----------------------+-----------+
 | Name                  | Power (W) |
 +-----------------------+-----------+
-| Top                   |     0.155 |
+| Top                   |     0.159 |
 |   mo_clk_wiz_0        |     0.106 |
 |     inst              |     0.106 |
-|   mo_cpu_mem          |     0.015 |
-|     mo_cpu            |     0.014 |
-|       mo_control_unit |     0.009 |
-|       mo_reg_file     |     0.003 |
-|     mo_mem            |     0.001 |
-|       mo_dist_mem     |     0.001 |
-|   mo_ddu              |     0.002 |
+|   mo_cpu_mem          |     0.023 |
+|     mo_cpu            |     0.020 |
+|       mo_control_unit |     0.012 |
+|       mo_reg_file     |     0.005 |
+|     mo_mem            |     0.002 |
+|       mo_dist_mem     |     0.002 |
+|   mo_ddu              |     0.001 |
 +-----------------------+-----------+
 
 

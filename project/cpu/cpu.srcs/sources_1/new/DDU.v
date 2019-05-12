@@ -89,8 +89,8 @@ module DDU(
         end
         else
         begin
-            if(inc_sin) addr <= addr + 1;
-            else if(dec_sin) addr <= addr - 1;
+            if(inc_sin) addr <= addr + 4;
+            else if(dec_sin) addr <= addr - 4;
         end
     end
     

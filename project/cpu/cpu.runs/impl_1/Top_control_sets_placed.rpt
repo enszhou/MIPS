@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Sat May 11 23:09:31 2019
+| Date         : Sun May 12 17:48:57 2019
 | Host         : ENSZHOU running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Top_control_sets_placed.rpt
 | Design       : Top
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |    51 |
-| Unused register locations in slices containing registers |    65 |
+| Number of unique control sets                            |    55 |
+| Unused register locations in slices containing registers |    84 |
 +----------------------------------------------------------+-------+
 
 
@@ -34,15 +34,17 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      1 |            1 |
+|      1 |            3 |
 |      2 |            2 |
 |      3 |            3 |
 |      4 |            1 |
 |      5 |            1 |
+|      6 |            2 |
+|      7 |            1 |
 |     10 |            1 |
-|     13 |            1 |
+|     11 |            1 |
 |     15 |            1 |
-|    16+ |           40 |
+|    16+ |           39 |
 +--------+--------------+
 
 
@@ -52,11 +54,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             158 |           71 |
-| No           | No                    | Yes                    |              25 |            9 |
-| No           | Yes                   | No                     |               8 |            4 |
-| Yes          | No                    | No                     |            1030 |          574 |
-| Yes          | No                    | Yes                    |              82 |           38 |
+| No           | No                    | No                     |             158 |           78 |
+| No           | No                    | Yes                    |              22 |            8 |
+| No           | Yes                   | No                     |              10 |            6 |
+| Yes          | No                    | No                     |            1030 |          605 |
+| Yes          | No                    | Yes                    |              80 |           44 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -64,60 +66,64 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+-----------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------+------------------+----------------+
-|         Clock Signal        |                                                   Enable Signal                                                  |       Set/Reset Signal      | Slice Load Count | Bel Load Count |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------+------------------+----------------+
-|  mo_ddu/mo_clk_4k/clk_4khz  |                                                                                                                  | mo_ddu/mo_seg/Q[0]          |                1 |              1 |
-|  mo_ddu/mo_clk_4k/clk_4khz  |                                                                                                                  | mo_ddu/mo_seg/next_state[0] |                1 |              2 |
-|  mo_ddu/mo_clk_4k/clk_4khz  |                                                                                                                  | mo_ddu/mo_seg/an[5]_i_1_n_0 |                1 |              2 |
-| ~mo_clk_2m/clk_2mhz         |                                                                                                                  |                             |                2 |              3 |
-| ~mo_clk_2m/clk_2mhz         |                                                                                                                  | rst_IBUF                    |                2 |              3 |
-|  mo_ddu/mo_clk_4k/clk_4khz  |                                                                                                                  | mo_ddu/mo_seg/Q[2]          |                1 |              3 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/E[1]                                                                           | rst_IBUF                    |                3 |              4 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/ALUSrcB[1]_i_1_n_0                                                             | rst_IBUF                    |                1 |              5 |
-|  mo_ddu/mo_clk_4k/clk_4khz  |                                                                                                                  |                             |                6 |             10 |
-|  mo_clk_2m/clk_2mhz         | mo_ddu/mo_mul_sin_dec/q_reg_0                                                                                    | rst_IBUF                    |                3 |             13 |
-|  mo_clk_wiz_0/inst/clk_out1 |                                                                                                                  |                             |                5 |             15 |
-|  clk_cpu                    |                                                                                                                  | rst_IBUF                    |                7 |             22 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/E[0]                                                                           | rst_IBUF                    |               20 |             28 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17][0]                                                                  |                             |               17 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_9[0]                                                                |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_1[0]                                                                |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_6[0]                                                                |                             |               13 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_0[0]                                                                |                             |               17 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_0[0]                                                              | rst_IBUF                    |               11 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_2[0]                                                              |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_3[0]                                                              |                             |               25 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_4[0]                                                              |                             |               15 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_5[0]                                                              |                             |               15 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_1[0]                                                              |                             |               15 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_3[0]                                                                |                             |               24 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_1[0]                                                                |                             |               16 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14][0]                                                                  |                             |               16 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_2[0]                                                                |                             |               15 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_4[0]                                                                |                             |               16 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_13[0]                                                               |                             |               20 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_12[0]                                                               |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_4[0]                                                                |                             |               23 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_0[0]                                                                |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_2[0]                                                                |                             |               14 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_8[0]                                                                |                             |               19 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[13]_0[0]                                                                |                             |               23 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19][0]                                                                  |                             |               19 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_11[0]                                                               |                             |               12 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_10[0]                                                               |                             |               14 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14]_1[0]                                                                |                             |               19 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_14[0]                                                               |                             |               19 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_5[0]                                                                |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14]_0[0]                                                                |                             |               22 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_7[0]                                                                |                             |               25 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_3[0]                                                                |                             |               18 |             32 |
-|  clk_cpu                    | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite                                                                        |                             |               15 |             38 |
-|  clk_cpu                    | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_128_191_0_2_i_1_n_0 |                             |               11 |             44 |
-|  clk_cpu                    | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_192_255_0_2_i_1_n_0 |                             |               11 |             44 |
-|  clk_cpu                    | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_64_127_0_2_i_1_n_0  |                             |               11 |             44 |
-|  clk_cpu                    | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_0_63_0_2_i_1_n_0    |                             |               11 |             44 |
-|  clk_cpu                    |                                                                                                                  |                             |               58 |            130 |
-+-----------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------+------------------+----------------+
++------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+
+|                        Clock Signal                        |                                                   Enable Signal                                                  |                      Set/Reset Signal                     | Slice Load Count | Bel Load Count |
++------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+
+|  mo_ddu/mo_clk_4k/clk_4khz                                 |                                                                                                                  | mo_ddu/mo_seg/Q[0]                                        |                1 |              1 |
+|  mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_2_n_0 |                                                                                                                  | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_1_n_0 |                1 |              1 |
+|  mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_1_n_0 |                                                                                                                  | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_2_n_0 |                1 |              1 |
+|  mo_ddu/mo_clk_4k/clk_4khz                                 |                                                                                                                  | mo_ddu/mo_seg/an[5]_i_1_n_0                               |                1 |              2 |
+|  mo_ddu/mo_clk_4k/clk_4khz                                 |                                                                                                                  | mo_ddu/mo_seg/next_state[0]                               |                1 |              2 |
+|  mo_ddu/mo_clk_4k/clk_4khz                                 |                                                                                                                  | mo_ddu/mo_seg/Q[2]                                        |                1 |              3 |
+| ~clk_2mhz_BUFG                                             |                                                                                                                  | rst_IBUF                                                  |                2 |              3 |
+| ~clk_2mhz_BUFG                                             |                                                                                                                  |                                                           |                2 |              3 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/E[1]                                                                           | rst_IBUF                                                  |                2 |              4 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/ALUSrcB[1]_i_1_n_0                                                             | rst_IBUF                                                  |                2 |              5 |
+|  clk_2mhz_BUFG                                             |                                                                                                                  | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_2_n_0 |                1 |              6 |
+|  clk_2mhz_BUFG                                             |                                                                                                                  | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite_reg_LDC_i_1_n_0 |                2 |              6 |
+|  clk_2mhz_BUFG                                             |                                                                                                                  | rst_IBUF                                                  |                3 |              7 |
+|  mo_ddu/mo_clk_4k/clk_4khz                                 |                                                                                                                  |                                                           |                5 |             10 |
+|  clk_2mhz_BUFG                                             | mo_ddu/mo_mul_sin_dec/q_reg_0                                                                                    | rst_IBUF                                                  |                3 |             11 |
+|  mo_clk_wiz_0/inst/clk_out1                                |                                                                                                                  |                                                           |                5 |             15 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/E[0]                                                                           | rst_IBUF                                                  |               24 |             28 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_5[0]                                                              |                                                           |               18 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_3[0]                                                              |                                                           |               25 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_4[0]                                                              |                                                           |               15 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_2[0]                                                              |                                                           |               23 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_1[0]                                                              |                                                           |               21 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_4[0]                                                                |                                                           |               24 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14]_0[0]                                                                |                                                           |               23 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_2[0]                                                                |                                                           |               20 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14]_1[0]                                                                |                                                           |               23 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_4[0]                                                                |                                                           |               26 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_6[0]                                                                |                                                           |               19 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_3[0]                                                                |                                                           |               14 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_10[0]                                                               |                                                           |               15 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[14][0]                                                                  |                                                           |               13 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[13]_0[0]                                                                |                                                           |               20 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_0[0]                                                                |                                                           |               12 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_11[0]                                                               |                                                           |               20 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_12[0]                                                               |                                                           |               19 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_14[0]                                                               |                                                           |               19 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_7[0]                                                                |                                                           |               22 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19][0]                                                                  |                                                           |               23 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_0[0]                                                                |                                                           |               19 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17][0]                                                                  |                                                           |               16 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_3[0]                                                                |                                                           |               18 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_8[0]                                                                |                                                           |               16 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_9[0]                                                                |                                                           |               15 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_1[0]                                                                |                                                           |               22 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[19]_2[0]                                                                |                                                           |               15 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_13[0]                                                               |                                                           |               20 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_5[0]                                                                |                                                           |               17 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/RegWrite_reg_0[0]                                                              | rst_IBUF                                                  |               13 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IR_reg[17]_1[0]                                                                |                                                           |               15 |             32 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_cpu/mo_control_unit/IRWrite                                                                        |                                                           |               18 |             38 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_192_255_0_2_i_1_n_0 |                                                           |               11 |             44 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_128_191_0_2_i_1_n_0 |                                                           |               11 |             44 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_64_127_0_2_i_1_n_0  |                                                           |               11 |             44 |
+|  clk_2mhz_BUFG                                             | mo_cpu_mem/mo_mem/mo_dist_mem/U0/synth_options.dist_mem_inst/gen_sdp_ram.sdpram_inst/ram_reg_0_63_0_2_i_1_n_0    |                                                           |               11 |             44 |
+|  clk_2mhz_BUFG                                             |                                                                                                                  |                                                           |               66 |            130 |
++------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+
 
 

@@ -22,6 +22,7 @@
 
 module CPU_MEM(
     input clk_2mhz,
+    input cont,
     input run,
     input rst,
     input mode_cpu,
@@ -32,9 +33,10 @@ module CPU_MEM(
     wire clk_cpu, we;
     wire [31:0] ra_cpu,wd;
     
-    assign clk_cpu = clk_2mhz & run;
+    //assign clk_cpu = clk_2mhz & run;
+    assign clk_cpu = clk_2mhz;
     
     MEM mo_mem(clk_cpu, rst, mode_cpu, we, ra_cpu, wd, ra_cpu, addr, mem_data);   
-    CPU mo_cpu(clk_cpu, rst, mem_data, addr[6:2], ra_cpu, we,wd,reg_data, pc);
+    CPU mo_cpu(clk_cpu, cont, run, rst, mem_data, addr[6:2], ra_cpu, we,wd,reg_data, pc);
     
 endmodule

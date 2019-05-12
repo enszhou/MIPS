@@ -49,7 +49,7 @@ module Top(
     clk_wiz_0 mo_clk_wiz_0(clk_8mhz,CLK100MHZ);
     CLK #(4) mo_clk_2m(clk_8mhz,0,1,clk_2mhz);
     DDU mo_ddu(cont,step,mem,inc,dec,pc,mem_data,reg_data,rst,clk_8mhz,clk_2mhz,run,addr,led,display);
-    CPU_MEM mo_cpu_mem(clk_2mhz, run, rst, mode_cpu, addr, pc, mem_data,reg_data);
+    CPU_MEM mo_cpu_mem(clk_2mhz,cont, run, rst, mode_cpu, addr, pc, mem_data,reg_data);
     
     //MEM mo_mem(clk_cpu,rst,mode_cpu,we,ra_cpu,wd,ra_cpu,addr,mem_data);
     //CPU mo_cpu(clk_cpu, rst, mem_data, addr[6:2], ra_cpu, we,wd,reg_data);
