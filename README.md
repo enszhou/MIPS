@@ -1,2 +1,2 @@
 ## Note
-These codes for reference only. Please don't cpoy, otherwise the TA will find.
+These codes for reference only.
